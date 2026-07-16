@@ -1,0 +1,23 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.alyiox/mcp-samsclub-ads",
+  "title": "Sam's Club Sponsored Ads APIs",
+  "description": "MCP server for Sam's Club Sponsored Ads APIs",
+  "repository": {
+    "url": "https://github.com/alyiox/mcp-samsclub-ads",
+    "source": "github"
+  },
+  "version": "0.1.0a1",
+  "packages": [
+    {
+      "registryType": "pypi",
+      "registryBaseUrl": "https://pypi.org",
+      "identifier": "mcp-samsclub-ads",
+      "version": "0.1.0a1",
+      "runtimeHint": "uvx",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}
