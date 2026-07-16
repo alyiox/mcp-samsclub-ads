@@ -81,9 +81,21 @@ still reachable via `call_endpoint` with a raw `method`+`path`.
 Without sandbox credentials the server runs and its discovery/signing are verified offline,
 but calls cannot be exercised end-to-end.
 
-Deferred (see git history / plan): an offline `scripts/build_spec.py` scraper that opens a
-review PR in CI, and flipping a spec's `auth` flag to fetch the authenticated live Swagger
-backend once credentials exist.
+## Spec drift detection
+
+[`scripts/build_spec.py`](scripts/build_spec.py) scrapes the docs into a *candidate* spec at
+[`spec-candidate/`](spec-candidate/) — offline, never at runtime. The
+[`Spec drift`](.github/workflows/spec-drift.yml) workflow runs it on a schedule and opens a
+PR when the docs change; a reviewer then ports real changes into the hand-authored canonical
+spec. The candidate is intentionally flat and is never shipped or loaded.
+
+```bash
+uv run --group spec-build python scripts/build_spec.py          # write candidate
+uv run --group spec-build python scripts/build_spec.py --check  # exit 1 on drift
+```
+
+Still deferred: flipping a spec's `auth` flag to fetch the authenticated live Swagger backend
+once partner credentials exist.
 
 ## Development
 
