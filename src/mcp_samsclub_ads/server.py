@@ -163,16 +163,14 @@ async def call_endpoint(
         ),
     ] = None,
 ) -> ApiToolResult:
-    region_upper = region.upper()
-    env_lower = env.lower()
-
-    if region_upper not in config.regions:
+    if region not in config.regions:
         available = ", ".join(config.regions.keys())
         msg = f"region '{region}' not found in config. Available: {available}"
         return ApiToolResult(error=msg)
 
-    if env_lower not in config.regions[region_upper]:
-        available = ", ".join(config.regions[region_upper].keys())
+    region_envs = config.regions[region]
+    if env not in region_envs:
+        available = ", ".join(region_envs.keys())
         msg = f"env '{env}' not found for region '{region}'. Available: {available}"
         return ApiToolResult(error=msg)
 
@@ -189,7 +187,7 @@ async def call_endpoint(
     if not method or not path:
         return ApiToolResult(error="provide operation_id, or both method and path.")
 
-    env_cfg = config.regions[region_upper][env_lower]
+    env_cfg = region_envs[env]
 
     if ad_type_lower not in env_cfg.base_urls:
         msg = f"base_url for ad_type '{ad_type}' not configured for {region}/{env}."
