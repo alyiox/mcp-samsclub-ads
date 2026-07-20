@@ -7,13 +7,13 @@
     "url": "https://github.com/alyiox/mcp-samsclub-ads",
     "source": "github"
   },
-  "version": "0.1.0a2",
+  "version": "0.1.0a3",
   "packages": [
     {
       "registryType": "pypi",
       "registryBaseUrl": "https://pypi.org",
       "identifier": "mcp-samsclub-ads",
-      "version": "0.1.0a2",
+      "version": "0.1.0a3",
       "runtimeHint": "uvx",
       "transport": {
         "type": "stdio"
